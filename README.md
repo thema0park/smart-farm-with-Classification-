@@ -81,5 +81,52 @@ PC에서 전송받은 해당 식물의 최적의 사육 환경을 아두이노�
 릴레이와 연결하여 사용됨.
 
 CNN이란?
+
 Convolution Neural Network의 약자.
-이미지를 Raw Data로 사용하여 학습하는 신경망.
+CNN, RNN, GAN등의 Deep learning에서 쓰이는 신경망 중 하나.
+이전에 쓰이던 신경망으로 Fully Connected Layer가 있음.
+(이전 레이어의 모든 노드가 다음 레이어의 모든 노드에 연결된 레이어를 Fully Connected Layer(FC Layer)라
+고 합니다. FC Layer를 Dense Layer라 함.)
+
+특징으로 이미지의 특징을 추출하는 부분과 클래스를 분류하는 부분으로 나눌 수 있다.
+
+특징 추출 -> Convolution Layer(필수),Pooling Layer(선택)
+-----------------Flattend Layer 존재---------------------
+클래스 분류 -> Fully Connected Layer
+
+Convoultion Layer란?
+
+입력 데이터에 필터를 적용 후 활성화 함수를 반영하는 필수 요소.
+
+Flatten Layer란?
+
+이미지 형태의 데이터를 배열로 만드는 요소
+
+Fully Connected Layer란?
+
+이미지 분류를 위해 CNN 마지막에 들어가는 요소.
+
+*추가로 알아두면 좋은 계층
+Dropout layer
+해당 계층은 신경망이 학습중일때, 랜덤하게 뉴런을 꺼서 학습을 방해함으로써, 학습이 학습용 데이터에 치우치는 과적합 현상을 방지할 때 사용한다.
+
+CNN 작동 과정
+
+입력데이터는 Convoultio Layer를 통해 정해진 필터가 순회하며 합성곱을 계산.
+계산 결과를 이용하여 Feature map을 생성.(3채널 이미지의 경우 각 채널별 합성곱의 합을 Feature map으로)
+Feature map에 활성 함수(ReLu같은)를 적용하여 Activation map 생성.
+출력 데이터의 크기를 줄이거나 특정 데이터를 강조하기 위해 Pooling Layer 사용.(max,average,min pooling)
+위 과정을 여러번 거침.
+Flatten Layer로 Convolution 형태의 데이터를 형태 변환.
+Softmax Layer를 거쳐서 최종 결과 도출.(장미일 확률을 0~1사이의 값으로 표시해주기 위해 사용.)
+
+! why use CNN?
+CNN이 사람이나 동물 인식에 탁월한 성능을 나타냄.
+Fully Connected 신경망으로 학습을 진행할 경우, 데이터 셋이 더 많이 필요하고 시간도 오래걸림.
+구글의 알파고가 사용한 신경망으로도 유명하기 때문에 사용한 경향도 있음.
+
+! why use Keras?
+Keras는 tensorflow같은 백엔드 위에 구축되어 있는 하이 레벨 패키지 (그냥 라이브러리쯤으로 이해.) 이다.
+tensorflow를 사용해서 구축할 경우 1000줄 정도 필요한 구성을 Keras를 이용하면 더 짧게 구성할 수 있기 때문에 Keras를 사용했다.
+애초에 Keras 자체가 머신러닝 초심자에게 추천하는 프레임워크이기 때문에 사용한 것도 있다.
+
